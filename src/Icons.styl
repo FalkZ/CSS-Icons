@@ -199,5 +199,63 @@ diafix = translatey(0.5em - dia /2)
       background transparent
       border-bottom-width 0.5em
       transform translate(0.1em, 0em)
-      box-shadow -0.2em  0.5em 0 -0.15em currentColor
+      box-shadow 0em  0.5em 0 -0.2em currentColor
+    
+  
+  &.Mail
+    &::before
+      width 1em - 2*stroke
+      height 0.8em - 2 * stroke
+      border-radius stroke*1.5
+      background none
+      border-width stroke
+      transform translate(0em, 0.1em) 
+       
+
+    &::after
+      width stroke
+      width 0
+      height 0
+      border-left 0.5em solid transparent
+      border-right 0.5em solid transparent
+      background transparent
+      border-top-width 0.4em
+      transform translate(0em, 0.2em)
+
+  &.Pencil
+    &::before
+      width 0.75em
+      height 0.1em
+      border-radius stroke
+      background none
+      border-width stroke
+      transform translate(-0.1em, 0.28em) rotate(40deg)
+
+    &::after
+      width stroke
+      width 0
+      height 0
+      border-top 0.13em solid transparent
+      border-bottom 0.13em solid transparent
+      background transparent
+      border-left-width 0.3em
+      transform translate(0.75em, 0.75em) rotate(40deg)
+    
+  &.Globe
+    &::before
+      width full - 2*stroke
+      height full - 2*stroke
+      border-radius 50%
+      background none
+      border-width stroke
+      transform rotate(90deg)
+
+    &::after
+      width stroke
+      height 0.6em
+      width 0.4em
+      border-radius 50%
+      box-shadow -0.25em -0.1em 0px -0.1em currentColor, -0.1em -0.1em 0px -0.1em currentColor , 0.1em -0.1em 0px -0.1em currentColor, -0.2em -0.42em 0px -0.17em currentColor, -0.55em -0.2em 0px -0.12em currentColor, -0.45em 0.25em 0px -0.16em currentColor, -0.07em 0.25em 0px -0.16em currentColor
+      transform translate(0.48em,  0.32em) rotate(20deg)
+   
       

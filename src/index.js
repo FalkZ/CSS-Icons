@@ -60,7 +60,10 @@ ReactDOM.render(
 			'Youtube',
 			'Link',
 			'Menu',
-			'Home'
+			'Home',
+			'Mail',
+			'Pencil',
+			'Globe'
 		]}
 	/>,
 	document.getElementById('Body')
