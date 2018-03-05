@@ -1,26 +1,203 @@
 stroke = 0.1em
 
+full = 1em
+
+half = 0.5em
+
+center = translatex(half - stroke/2)
+
+dia = 1.3em
+
+diafix = translatey(0.5em - dia /2)
+
+
+.reload
+  font-size 30px
+  display block
+  position fixed
+  font-family sans-serif
+  font-weight bold
+  background black
+  border-radius 10px 0 0 0
+  padding 5px
+  cursor pointer
+  color white
+  bottom 0
+  right 0
+  border none
+  outline none
 
 #Body
-  font-size 40px
+  font-size 80px
 
 .Icon
   display inline-block
   width 1em
   height 1em
-  margin 0 0.1em 
-  border 0.1px dotted grey
+  margin 0.3em 
+  border 0.1px dotted #eee
   postition relative
   color black
-  &::before
+  float left 
+  *, &
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+
+  &::before, &::after
     content ''
-    postition absolute
-    display block
+    position absolute
+    display inline-block
+    background currentColor
+    border-color currentColor
+    border-style solid
+    border-width 0
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
-  &.Facebook
-     &::before
-       background currentColor
+  &.Cross
+    &::before
        width stroke
-       height 1em
-
+       height dia
+       transform diafix center rotate(45deg)
     
+    &::after
+       width stroke
+       height dia
+       transform diafix center rotate(-45deg)
+
+  &.Plus
+    &::before
+      width stroke
+      height full
+      transform center 
+
+    &::after
+      width stroke
+      height full
+      transform center rotate(90deg)
+  
+  &.Minus
+    &::before
+      width stroke
+      height full
+      transform center rotate(90deg)
+
+    &::after
+      width stroke
+      height full
+      transform center rotate(90deg)
+
+  &.Window
+    &::before
+      width full - 2*stroke
+      height full - 2*stroke
+      border-radius stroke
+      background none
+      border-width stroke
+      transform rotate(90deg)
+
+    &::after
+      width stroke*2
+      height full - stroke
+      transform center translatey(- half + stroke*2.1) rotate(90deg)
+    
+  &.Facebook
+    &::before
+      width 0.2em
+      border-left-width stroke*2
+      border-top-width stroke*2
+      background none
+      border-radius 0.3em 0 0 0
+      height full - stroke*2
+      transform center 
+
+    &::after
+      width stroke*2
+      height 0.5em
+      transform center translate(0em,  0.2em) rotate(90deg)
+
+  &.Instagram
+    &::before
+      width full - 2*stroke
+      height full - 2*stroke
+      border-radius stroke*2
+      background none
+      border-width stroke
+      transform rotate(90deg)
+
+    &::after
+      width stroke
+      height 0.4em
+      width 0.4em
+      border-radius 50%
+      box-shadow: 0.25em -0.25em 0px -0.12em currentColor
+      transform translate(0.28em,  0.32em)
+  
+  &.Youtube
+    &::before
+      width full - 2*stroke
+      height 0.7em - 2*stroke
+      border-radius stroke*1.5
+      background none
+      border-width stroke
+      transform translatey(0.15em) 
+
+    &::after
+      width stroke
+      width 0
+      height 0
+      border-top 0.2em solid transparent
+      border-bottom 0.2em solid transparent
+      background transparent
+      border-left-width 0.3em
+      transform translate(0.4em, 0.3em) 
+  
+   &.Link
+    &::before
+      width 0.5em
+      height 0.24em
+      border-radius stroke*2
+      background none
+      border-width stroke
+      transform translatey( 0.4em) rotate(-50deg)
+
+    &::after
+      width 0.5em
+      height 0.24em
+      border-radius stroke*2
+      background none
+      border-width stroke
+      transform translate(0.35em, 0.2em) rotate(-50deg) 
+    
+   &.Menu
+    &::before
+      width stroke
+      height full
+      transform center translatey(- half + stroke ) rotate(90deg)
+
+    &::after
+      width stroke
+      height full
+      box-shadow -0.4em 0 0px 0em currentColor
+      transform center translatey( half - stroke ) rotate(90deg)
+    
+  &.Home
+    &::before
+      width 0.6em
+      height 0.4em 
+      border-radius stroke*1.5
+      background none
+      border-width stroke
+      transform translate(0.1em, 0.5em - stroke) 
+       
+
+    &::after
+      width stroke
+      width 0
+      height 0
+      border-left 0.4em solid transparent
+      border-right 0.4em solid transparent
+      background transparent
+      border-bottom-width 0.5em
+      transform translate(0.1em, 0em)
+      box-shadow -0.2em  0.5em 0 -0.15em currentColor
+      
