@@ -1,4 +1,4 @@
 {
 	"infiniteLoopProtection": true,
-	"hardReloadOnChange": true
+	"hardReloadOnChange": false
 }

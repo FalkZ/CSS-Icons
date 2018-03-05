@@ -63,7 +63,8 @@ ReactDOM.render(
 			'Home',
 			'Mail',
 			'Pencil',
-			'Globe'
+			'Globe',
+			'Github'
 		]}
 	/>,
 	document.getElementById('Body')
