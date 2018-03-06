@@ -44,7 +44,10 @@ class Showcase extends Component {
 		this.reload = this.reload.bind(this)
 	}
 	reload(icon) {
-		this.setState({ icon })
+		if (icon === this.state.icon) {
+			icon = this.state.last
+		}
+		this.setState({ icon, last: this.state.icon })
 	}
 
 	render() {
@@ -79,7 +82,12 @@ ReactDOM.render(
 			'Thumb',
 			'Share',
 			'Dot',
-			'Person'
+			'Person',
+			'Happy',
+			'Sad',
+			'Wink',
+			'Medium',
+			'Shuffle'
 		]}
 	/>,
 	document.getElementById('Body')

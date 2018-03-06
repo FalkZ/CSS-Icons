@@ -27,6 +27,7 @@ arrow(awidth, aheight = awidth/1.5)
   background transparent
   border-left per(awidth/2) solid transparent
   border-right per(awidth/2) solid transparent
+  border-bottom-color transparent
   border-top-width per(aheight)
 
 line(llength = 100, lstroke = 10)
@@ -36,6 +37,8 @@ line(llength = 100, lstroke = 10)
 edge(ewidth = 100, eheight = ewidth, estroke = 10, radius = 0)
   border-top-width per(estroke)
   border-left-width per(estroke)
+  border-bottom-color transparent
+  border-right-color transparent
   width per(ewidth, 1)
   height per(eheight, 1)
   border-radius per(radius) 0 0 0
@@ -311,3 +314,52 @@ copy(x = 0, y = 0, size=0)
       transform move(15, 0)
 
       
+  &.Happy
+    &::before
+      circle()
+
+    &::after
+      edge(40,40, 10, 50)
+      box-shadow copy(32, 12, -13), copy(12, 32, -13)
+      transform move(30, 50) rotate(-135deg)
+  
+  &.Sad
+    &::before
+      circle()
+
+    &::after
+      edge(40,40, 10, 50)
+      box-shadow copy(-35, -15, -13), copy(-15, -35, -13)
+      transform move(30, 50) rotate(45deg)
+
+  
+  &.Wink
+    &::before
+      circle()
+
+    &::after
+      edge(40,40, 10, 50)
+      box-shadow copy(20, 7, -13), copy(12, 32, -13)
+      transform move(35, 50) rotate(-145deg)
+  
+  &.Medium
+    &::before
+      circle()
+
+    &::after
+      line(40)
+      height 0.4em
+      box-shadow copy(-15, -55, -15), copy(15, -55, -15)
+      transform move(30, 70) 
+  
+  &.Shuffle
+    &::before
+      edge(60, 60, 10, 60)  
+      box-shadow copy(41, 10, -20)
+      transform move(20, 30) rotate(-160deg)
+
+    &::after
+      edge(60, 60, 10, 60)
+      box-shadow copy(10, 41, -20)
+      transform move(20, 30) rotate(-110deg)
+    
