@@ -66,7 +66,10 @@ ReactDOM.render(
 			'Mail',
 			'Pencil',
 			'Globe',
-			'Github'
+			'Github',
+			'Checkmark',
+			'Heart',
+			'Thumb'
 		]}
 	/>,
 	document.getElementById('Body')
