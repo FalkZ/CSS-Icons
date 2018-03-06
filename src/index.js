@@ -1,6 +1,8 @@
-import './Icons.styl'
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+
+import './Icons.styl'
+import './index.styl'
 
 const getRandomNumber = range => Math.floor(Math.random() * Math.floor(range))
 

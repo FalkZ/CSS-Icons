@@ -1,109 +1,116 @@
+
+/* CONSTANTS */
+
 stroke = 0.1em
-
-full = 1em
-
+fullwidth = 1em
 half = 0.5em
-
 center = translatex(half - stroke/2)
-
 dia = 1.3em
-
 diafix = translatey(0.5em - dia /2)
 
+curve = cubic-bezier(0.68, -0.55, 0.27, 1.55)
 
-.reload
-  font-size 30px
-  display block
-  position fixed
-  font-family sans-serif
-  font-weight bold
-  background black
-  border-radius 10px 0 0 0
-  padding 5px
-  cursor pointer
-  color white
-  bottom 0
-  right 0
-  border none
-  outline none
+/* FUNCTIONS */
 
-#Body
-  font-size 80px
+full(borders)
+  fullwidth - stroke*borders
+
+per(percent = unit(em), borders = 0)
+  percent/100 - stroke*borders
+
+arrow(awidth, aheight = awidth/1.5)
+  width 0
+  height 0
+  background transparent
+  border-left per(awidth/2) solid transparent
+  border-right per(awidth/2) solid transparent
+  border-top-width per(aheight)
+
+line(llength = 100, lstroke = 10)
+  border-top-width per(lstroke)
+  width per(llength)
+
+circle(cwidth = 100, cheight = cwidth, cstroke = 8)
+  width per(cwidth, 2)
+  height per(cheight, 2)
+  border-radius 50%
+  border-width cstroke
+
+dot(cwidth = 100, cheight = cwidth)
+  width 0
+  height 0
+  border-radius 50%
+  border-width per(cheight/2) per(cwidth/2)
+
+box(bwidth = 100, radius = 10, bheight = bwidth)
+  width per(bwidth, 2)
+  height per(bheight, 2)
+  border-radius per(radius)
+  border-width stroke
+
+block(bwidth = 100, bheight = bwidth, radius1 = 10, radius2 = radius1, radius3 = radius1, radius4 = radius2)
+  width 0
+  height 0
+  border-width per(bheight/2) per(bwidth/2)
+  border-radius per(radius1) per(radius2) per(radius3) per(radius4)
+
+
+/* PRESETS */
 
 .Icon
   display inline-block
   width 1em
   height 1em
   margin 0.3em 
-  border 0.1px dotted #eee
   postition relative
-  color black
-  float left 
-  
-  *, &
-    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
 
   &::before, &::after
-    content ''
+    content '' 
     position absolute
     display inline-block
-    background currentColor
+    //background currentColor
     border-color currentColor
     border-style solid
     border-width 0
-    transition transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)
+    transition transform 0.5s curve, width 0.5s curve, height 0.5s curve, box-shadow 0.5s curve, border-radius 0.5s curve //cubic-bezier(1, 0.01, 1,-0.13)
 
-  &::after
-    color #0a2a59 
+/* ICONS */
 
   &.Cross
     &::before
-       width stroke
-       height 1em
-       transform diafix center  translatey(0.15em) rotate(45deg)
-    
+      line()
+      transform translatey(0.45em) rotate(45deg)
+        
     &::after
-       width stroke
-       height 1em
-       transform diafix center  translatey(0.15em) rotate(-45deg)
-
+      line()
+      transform translatey(0.45em) rotate(-45deg)
+    
   &.Plus
     &::before
-      width stroke
-      height 0.8em
-      transform center translatey(0.1em)
+      line(80)
+      transform translate(0.1em, 0.45em)
 
     &::after
-      width stroke
-      height 0.8em
-      transform center translatey(0.1em) rotate(90deg)
+      line(80)
+      transform translate(0.1em, 0.45em) rotate(90deg)
   
   &.Minus
     &::before
-      width stroke
-      height 0.8em
-      transform center translatey(0.1em) rotate(90deg)
+      line(80)
+      transform translate(0.1em, 0.45em)
 
     &::after
-      width stroke
-      height 0.8em
-      transform center translatey(0.1em) rotate(90deg)
+      line(80)
+      transform translate(0.1em, 0.45em)
 
   &.Window
     &::before
-      width full - 2*stroke
-      height full - 2*stroke
-      border-radius stroke
-      background none
-      border-width stroke
-      transform rotate(90deg)
+      box()
 
     &::after
-      width stroke*2
-      height full - stroke
-      transform center translatey(- half + stroke*2.1) rotate(90deg)
-      z-index -1
+      line(80, 20)
+      transform translate(0.1em, 0.1em)
 
   &.Facebook
     &::before
@@ -112,99 +119,63 @@ diafix = translatey(0.5em - dia /2)
       border-top-width stroke*2
       background none
       border-radius 0.3em 0 0 0
-      height full - stroke*2
+      height full(2)
       transform center 
 
     &::after
-      width stroke*2
-      height 0.5em
-      transform center translate(0em,  0.2em) rotate(90deg)
+      line(50, 20)
+      transform translate(0.3em,  0.35em) //rotate(90deg)
 
   &.Instagram
     &::before
-      width full - 2*stroke
-      height full - 2*stroke
-      border-radius stroke*2
-      background none
-      border-width stroke
-      transform rotate(90deg)
+      box(100, 20)
 
     &::after
-      width stroke
-      height 0.4em
-      width 0.4em
-      border-radius 50%
+      dot(40)
       box-shadow: 0.25em -0.25em 0px -0.12em currentColor
       transform translate(0.28em,  0.32em)
   
   &.Youtube
     &::before
-      width full - 2*stroke
-      height 0.7em - 2*stroke
-      border-radius stroke*1.5
-      background none
-      border-width stroke
+      box(100, 15, 70)
       transform translatey(0.15em) 
 
     &::after
       width stroke
-      width 0
-      height 0
-      border-top 0.2em solid transparent
-      border-bottom 0.2em solid transparent
-      background transparent
-      border-left-width 0.3em
-      transform translate(0.4em, 0.3em) 
+      arrow(35)
+      transform translate(0.35em, 0.4em) rotate(-90deg)
   
    &.Link
     &::before
-      width 0.5em
-      height 0.24em
-      border-radius stroke*2
-      background none
-      border-width stroke
+      box(67, 20, 42)
       transform translatey( 0.4em) rotate(-50deg)
 
     &::after
-      width 0.5em
-      height 0.24em
-      border-radius stroke*2
-      background none
-      border-width stroke
+      box(67, 20, 42)
       transform translate(0.35em, 0.2em) rotate(-50deg) 
     
    &.Menu
     &::before
-      width stroke
-      height  0.8em
-      transform center translatey(- half + stroke +0.2em) rotate(90deg)
+      line(80)
+      transform translate(0.1em, 0.15em)
 
     &::after
-      width stroke
-      height 0.8em
-      box-shadow -0.3em 0 0px 0em currentColor
-      transform center translatey( half - stroke ) rotate(90deg)
+      line(80)
+      transform translate(0.1em, 0.75em)
+      box-shadow 0 -0.3em  0px 0em currentColor
     
   &.Home
     &::before
       width 0.6em
       height 0.4em 
-      border-radius stroke*1.5
-      background none
-      border-width stroke
-      transform translate(0.1em, 0.5em - stroke) 
+      box(80, 15, 60)
+      transform translate(0.1em, 0.4em) 
        
 
     &::after
-      width stroke
-      width 0
-      height 0
-      border-left 0.4em solid transparent
-      border-right 0.4em solid transparent
-      background transparent
-      border-bottom-width 0.5em
-      transform translate(0.1em, 0em)
-      box-shadow 0em  0.5em 0 -0.2em currentColor
+      arrow(80, 50)
+      transform translate(0.1em, 0em) rotate(180deg)
+      box-shadow 0em -0.5em 0 -0.2em currentColor
     
   
   &.Mail
@@ -218,67 +189,44 @@ diafix = translatey(0.5em - dia /2)
        
 
     &::after
-      width stroke
-      width 0
-      height 0
-      border-left 0.5em solid transparent
-      border-right 0.5em solid transparent
-      background transparent
-      border-top-width 0.4em
+      arrow(100, 40)
       transform translate(0em, 0.2em)
       z-index -1
 
   &.Pencil
     &::before
-      width 0.75em
-      height 0.1em
-      border-radius stroke
-      background none
-      border-width stroke
+      box(95, 10, 30)
       transform translate(-0.1em, 0.28em) rotate(40deg)
 
     &::after
       width stroke
-      width 0
-      height 0
-      border-top 0.13em solid transparent
-      border-bottom 0.13em solid transparent
-      background transparent
-      border-left-width 0.3em
-      transform translate(0.75em, 0.75em) rotate(40deg)
+      arrow(25, 30)
+      transform translate(0.77em, 0.72em) rotate(-50deg)
     
   &.Globe
-    &::before
-      width full - 2*stroke
-      height full - 2*stroke
-      border-radius 50%
-      background none
-      border-width stroke
-      transform rotate(90deg)
+    &::before   
+      circle()
 
     &::after
       width stroke
       height 0.6em
       width 0.4em
-      border-radius 50%
+      dot(40, 60)
       box-shadow -0.25em -0.1em 0px -0.1em currentColor, -0.1em -0.1em 0px -0.1em currentColor , 0.1em -0.1em 0px -0.1em currentColor, -0.2em -0.42em 0px -0.17em currentColor, -0.55em -0.2em 0px -0.12em currentColor, -0.45em 0.25em 0px -0.16em currentColor, -0.07em 0.25em 0px -0.16em currentColor
       transform translate(0.48em,  0.32em) rotate(20deg)
       z-index -1
 
   &.Github
     &::before
-      width full - 2*stroke
+      width full(2)
       height 0.6em
       border-radius 45%
       background none
       border-width stroke
-      box-shadow inset 0 0.1em 0 0.03em currentColor
-      transform  
+      box-shadow inset 0 0.1em 0 0.03em currentColor 
 
     &::after
-      width 0.35em
-      height 0.25em
-      border-radius 0.15em 0.15em 0 0
+      block(35, 25, 15,15,0,0)
       transform translate(0.325em, 0.75em) 
       box-shadow -0.18em -0.46em 0 -0.07em currentColor, 0.18em -0.46em 0 -0.07em  currentColor, 0.26em -0.83em 0 -0.07em  currentColor, -0.26em -0.83em 0 -0.07em  currentColor, 0em -0.3em 0 -0.11em currentColor
       
