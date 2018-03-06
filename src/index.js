@@ -22,29 +22,36 @@ const Random = arr => {
 	return randomArr
 }
 
-const Icons = ({ icons }) =>
+const Icons = ({ icons, onClick }) =>
 	icons.map((icon, index) => (
-		<div id={index} className={'Icon ' + icon} key={index} />
+		<div
+			id={index}
+			className={'Icon ' + icon}
+			key={index}
+			onClick={onClick.bind(this, icon)}
+		/>
 	))
+const Preview = ({ icon }) => <div className={'Preview Icon ' + icon} />
 
 class Showcase extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { icons: props.icons }
+		this.state = {
+			icons: props.icons,
+			icon: props.icons[props.icons.length - 1]
+		}
 
 		this.reload = this.reload.bind(this)
 	}
-	reload() {
-		this.setState({ icons: Random(this.props.icons) })
+	reload(icon) {
+		this.setState({ icon })
 	}
 
 	render() {
 		return (
 			<div>
-				<Icons icons={this.state.icons} />
-				<button className="reload" onClick={this.reload}>
-					reload
-				</button>
+				<Preview icon={this.state.icon} />
+				<Icons icons={this.state.icons} onClick={this.reload} />
 			</div>
 		)
 	}
@@ -69,7 +76,10 @@ ReactDOM.render(
 			'Github',
 			'Checkmark',
 			'Heart',
-			'Thumb'
+			'Thumb',
+			'Share',
+			'Dot',
+			'Person'
 		]}
 	/>,
 	document.getElementById('Body')

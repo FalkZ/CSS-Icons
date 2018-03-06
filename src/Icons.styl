@@ -18,6 +18,9 @@ full(borders)
 per(percent = unit(em), borders = 0)
   percent/100 - stroke*borders
 
+move(x, y = x)
+  translate(per(x), per(y))
+
 arrow(awidth, aheight = awidth/1.5)
   width 0
   height 0
@@ -30,11 +33,19 @@ line(llength = 100, lstroke = 10)
   border-top-width per(lstroke)
   width per(llength)
 
-circle(cwidth = 100, cheight = cwidth, cstroke = 8)
+edge(ewidth = 100, eheight = ewidth, estroke = 10, radius = 0)
+  border-top-width per(estroke)
+  border-left-width per(estroke)
+  width per(ewidth, 1)
+  height per(eheight, 1)
+  border-radius per(radius) 0 0 0
+
+
+circle(cwidth = 100, cheight = cwidth, cstroke = 10)
   width per(cwidth, 2)
   height per(cheight, 2)
   border-radius 50%
-  border-width cstroke
+  border-width per(cstroke)
 
 dot(cwidth = 100, cheight = cwidth)
   width 0
@@ -54,7 +65,7 @@ block(bwidth = 100, bheight = bwidth, radius1 = 10, radius2 = radius1, radius3 =
   border-width per(bheight/2) per(bwidth/2)
   border-radius per(radius1) per(radius2) per(radius3) per(radius4)
 
-copy(x = 0, y = 0, size)
+copy(x = 0, y = 0, size=0)
   per(x) per(y) 0 per(size) currentColor
 
 
@@ -76,7 +87,11 @@ copy(x = 0, y = 0, size)
     border-color currentColor
     border-style solid
     border-width 0
-    transition transform 0.5s curve, width 0.5s curve, height 0.5s curve, box-shadow 0.5s curve, border 0.5s curve //cubic-bezier(1, 0.01, 1,-0.13)
+    transition transform 0.5s curve, 
+               width 0.5s curve, 
+               height 0.5s curve, 
+               box-shadow 0.5s curve, 
+               border-width 0.5s curve //cubic-bezier(1, 0.01, 1,-0.13)
 
 /* ICONS */
 
@@ -126,17 +141,12 @@ copy(x = 0, y = 0, size)
 
   &.Facebook
     &::before
-      width 0.2em
-      border-left-width stroke*2
-      border-top-width stroke*2
-      background none
-      border-radius 0.3em 0 0 0
-      height full(2)
-      transform center 
+      edge(30, 90, 20, 30)
+      transform translatex(0.4em)
 
     &::after
       line(50, 20)
-      transform translate(0.3em,  0.35em) //rotate(90deg)
+      transform translate(0.25em,  0.35em) //rotate(90deg)
 
   &.Instagram
     &::before
@@ -178,8 +188,6 @@ copy(x = 0, y = 0, size)
     
   &.Home
     &::before
-      width 0.6em
-      height 0.4em 
       box(80, 15, 60)
       transform translate(0.1em, 0.4em) 
        
@@ -192,11 +200,7 @@ copy(x = 0, y = 0, size)
   
   &.Mail
     &::before
-      width 1em - 2*stroke
-      height 0.8em - 2 * stroke
-      border-radius stroke*1.5
-      background none
-      border-width stroke
+      box(100, 15, 80)
       transform translate(0em, 0.1em) 
        
 
@@ -275,5 +279,35 @@ copy(x = 0, y = 0, size)
       box-shadow copy(3, 13, 1),
                  copy(2, 26, 1),
                  copy(0, 41, 1)
+  &.Share
+     &::before
+      edge(60)
+
+      transform move(30, 22) rotate(-45deg)
+
+     &::after
+      dot(23)
+      transform move(15, 41)
+      box-shadow copy(34, 36),
+                 copy(34, -36)
+                 
+  
+  &.Dot
+     &::before
+      dot(23)
+      transform move(37, 37)
+
+     &::after
+      dot(23)
+      transform move(37, 37)
+  
+  &.Person
+     &::before
+      block(80, 40, 30,30, 0,0)
+      transform move(10, 60)
+
+     &::after
+      circle(70)
+      transform move(15, 0)
 
       
