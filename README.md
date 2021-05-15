@@ -1,5 +1,4 @@
-![just an experiment](https://badgen.net/badge/just%20an/experiment/cyan)
 
-# CSS-Icons
+# CSS Icons
 
-Pure CSS icons; just a fun little project
+Pure CSS icons, just a fun little project
